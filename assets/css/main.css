@@ -1969,6 +1969,7 @@ input, select, textarea {
 		table.default {
 			width: 100%;
 			border-collapse: collapse;
+			text-align: left;
 		}
 
 			table.default tbody tr {
@@ -1984,7 +1985,6 @@ input, select, textarea {
 			}
 
 			table.default th {
-				text-align: left;
 				padding: 0.5em 1em 1em 1em;
 			}
 
