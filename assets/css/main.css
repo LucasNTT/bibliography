@@ -2498,6 +2498,7 @@ input, select, textarea {
 
 	}
 	.opacity_medium {
+		background:#fff;
 		opacity: 0.5;
 	}
 	
