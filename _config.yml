@@ -1,4 +1,5 @@
 theme: jekyll-theme-cayman
 title: LucasNTT Bibliography
-description: []
+description: [A Technical Library]
 show_downloads: false
+is_project_page: false
