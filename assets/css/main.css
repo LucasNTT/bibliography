@@ -2497,3 +2497,7 @@ input, select, textarea {
 				}
 
 	}
+	.opacity_medium {
+		opacity: 0.5;
+	}
+	
