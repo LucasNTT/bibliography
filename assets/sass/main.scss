@@ -737,6 +737,7 @@
 		&.default {
 			width: 100%;
 			border-collapse: collapse;
+			text-align: left;
 
 			tbody {
 				tr {
@@ -749,12 +750,10 @@
 			}
 
 			td {
-				text-align: left;
 				padding: 0.5em 1em 0.5em 1em;
 			}
 
 			th {
-				text-align: left;
 				padding: 0.5em 1em 1em 1em;
 			}
 
