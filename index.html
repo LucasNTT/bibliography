@@ -10,7 +10,9 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
-	</head>
+		<link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+		<link rel="stylesheet" href="tagsInput/jquery.tagsinput-revisited.min.css" />
+</head>
 	<body class="is-preload">
 
 		<!-- Header -->
@@ -20,6 +22,10 @@
 				<p>A Technical Library</p>
 			</header>
 			<footer>
+				<form id="form">
+					<label>Simple tags input:</label>
+					<input id="form-tags-1" name="tags-1" type="text" value="">			
+				</form>
 				<a href="#first" class="button scrolly">Start browsing</a>
 			</footer>
 		</section>
@@ -28,7 +34,7 @@
 			<section id="first" class="main">
 				<header>
 					<div class="container">
-						<h2>Tessellate is a free responsive site template</h2>
+						<h2>398 documents</h2>
 						
 							<div class="table-wrapper">
 								<table class="default">
@@ -40,7 +46,7 @@
 									</thead>
 									<tbody>
 										<tr>
-											<td>00001</td>
+											<td>0001</td>
 											<td>Agarwal Burrus - Fast Convolution Using Fermat Number Transforms with Applications to Digital Filtering<br/>
 												<div style="font-size: small">
 												AC86 6-pages 1986 Agarwal Cooley FFT Paper Fourier transform and convolution subroutines for the IBM 3090 Vector Facility<br/>
@@ -49,7 +55,7 @@
 											</td>
 										</tr>
 										<tr>
-											<td>00001</td>
+											<td>0002</td>
 											<td>Crandall Fagin - Discrete Weighted Transforms and Large-Integer Arithmetic<br/>
 												<div style="font-size: small">
 												CF94 6-pages 1994 Crandall Fagin Discrete Weighted Transforms and Large-Integer Arithmetic<br/>
@@ -443,6 +449,14 @@
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
-
+			<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+			<script src="http://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+			<script src="tagsInput/jquery.tagsinput-revisited.min.js"></script>
+			
+			<script type="text/javascript">
+				$(function() {
+					$('#form-tags-1').tagsInput();
+				});
+			</script>
 	</body>
 </html>
