@@ -20,7 +20,7 @@
 				<div class="container medium">
 				<form id="form">
 					<label>Search by tags:</label>
-					<input id="form-tags-1" name="tags-1" type="text" value="">			
+					<input id="form-tags-1" name="tags-1" type="text" value="" pattern="[A-z0-9À-ž \-_]+">			
 				</form>
 				</div>
 				<br/>
@@ -453,7 +453,12 @@
 			
 			<script type="text/javascript">
 				$(function() {
-					$('#form-tags-1').tagsInput();
+					$('#form-tags-1').tagsInput({
+						minLength: 2,
+						change:function($elem) {
+							alert($elem.tags);
+						}
+					});
 				});
 			</script>
 	</body>
