@@ -1,43 +1,113 @@
-Tessellate by HTML5 UP
-html5up.net | @ajlkn
-Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+Assuming json file exists
+{"items": [
+    {
+		"Code": "CP05",
+		"Title": "FFT Algorithms using Discrete Weighted Transforms",
+		"Authors": [{"First_Name": "Richard E.", "Last_Name": "Crandall"}, {"First_Name": "Corell", "Last_Name": "Fagin"}],
+		"Filename": "FFT Algorithms.pdf",
+		"Tags": "CP05,1991,paper,8-pages,FFT,Crandall,Fagin,Algorithm,Discrete,Weighted,Transforms"},
+    {
+        "Name": "Sam",
+        "Points": 65,
+        "age": 21}
+]}
 
 
-This is Tessellate, a brand new responsive site template by AJ for HTML5 UP. It's a
-single pager (a format I'm pretty into right now), has styling for a crapload of
-basic elements, and includes a handy "dark" modifier class to flip a given element
-to a light-on-dark color scheme.
+dans HTML
+    <script type="text/javascript">
+		$('#tags').inputTags({
+			minLength: 2,
+			change:function($elem) {
+				DocViewer.OnTagChanged();
+			}
+		});
+        $(document).ready(function () {
+            $.ajax({
+				url: "data/users.json",
+				dataType: "json",
+				success: function(response) {
+					//console.log(response.Users);
+				    DocViewer.Init(response);
+					DocViewer.Refresh();
+				}
+			});
+        });
+    </script>
 
-Demo images* courtesy of Felicia Simion, a highly creative photographer/artist
-friend of mine over at deviantART. See more of her incredible work here:
+Dans JS
 
-http://ineedchemicalx.deviantart.com/
+function DocViewer() { };
+DocViewer.Data = null;
+DocViewer.noPage = 1;
+DocViewer.tags = [];
 
-(* = Not included! Only meant for use with my own on-site demo, so please do NOT download
-and/or use any of Felicia's work without her explicit permission!)
+DocViewer.Init = function (data) {
+    DocViewer.Data = data;
+};
 
-AJ
-aj@lkn.io | @ajlkn
+DocViewer.OnTagChanged = function () {
+	DocViewer.tags = [];
+	alert($('#tags').tags);
+	//foreach (var tag in tags) { // to be review according inputTags
+	//	DocViewer.tags[DocViewer.tags.length] = tag;
+	//}
+};
 
-PS: Not sure how to get that contact form working? Give formspree.io a try (it's awesome).
+DocViewer.Refresh = function () {
+    var html = 'No data available.';
+    if (DocViewer.Data.length > 0) {
+
+        $('h1').html(
+            DocViewer.Data[DocViewer.Data.length - 1]['Nm_Last_Name'] +
+            ' ' +
+            DocViewer.Data[DocViewer.Data.length - 1]['Nm_First_Name']
+        );
+		
+        html = '<table id="doc">';
+        html += '<thead>';
+        html += '<tr>';
+        for (var cat in DocViewer.Param['Categories']) {
+            if (DocViewer.Param['Categories'][cat]['NbVisibleCol'] > 0) {
+                html += '<th colspan="' + DocViewer.Param['Categories'][cat]['NbVisibleCol'] + '" class="group">' + DocViewer.Param['Categories'][cat]['Caption'] + '</th>';
+            }
+        }
+
+        html += '</tr>';
+        html += '<tr>';
+        for (var m in DocViewer.Param.VisibleCol) {
+            if (DocViewer.Param.VisibleCol[m].Visible) {
+                html += '<th>' + DocViewer.Param.VisibleCol[m].Caption + '</th>';
+                colCount++;
+            }
+        }
+        html += '</tr>';
+        html += '</thead>';
+        html += '</table>';
+        document.getElementById('dataHeader').innerHTML = html;    
+	}
+};
 
 
-Credits:
+Pour récupérer les paramètres: 
+function getParameterByName(name, url) {
+    if (!url) url = window.location.href;
+    name = name.replace(/[\[\]]/g, '\\$&');
+    var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, ' '));
+}
+// Can be "" if present but empty, and null is abstent
 
-	Demo Images:
-		Felicia Simion (ineedchemicalx.deviantart.com)
-			"Look for the bare necessities of life" (ineedchemicalx.deviantart.com/art/Look-for-the-bare-necessities-of-life-402262777)
-			"You and I collide" (ineedchemicalx.deviantart.com/art/You-and-I-collide-401457901)
-			"Emperor of the Stars" (ineedchemicalx.deviantart.com/art/Emperor-of-the-Stars-370265193)
-			"Sherlockin" (ineedchemicalx.deviantart.com/art/Sherlockin-369847236)
-			"A breath of Hope" (ineedchemicalx.deviantart.com/art/A-breath-of-Hope-366359145)
-			"The Pursuit" (ineedchemicalx.deviantart.com/art/The-Pursuit-355003425)
-			"Cherish" (ineedchemicalx.deviantart.com/art/Cherish-320041163)
-			"Mind is a clear stage" (ineedchemicalx.deviantart.com/art/Mind-is-a-clear-stage-375431607)
+Paramètres
+- pour le numéro de page
+- pour les tags
 
-	Icons:
-		Font Awesome (fontawesome.io)
+Tout changement de tag fait un ràz du numéro de page
+On peut changer la virgule par un espace, mais dans ce cas quand il tapera une seule lettre on aura l'erreur. Pourquoi pas, à tester...
 
-	Other:
-		jQuery (jquery.com)
-		Responsive Tools (github.com/ajlkn/responsive-tools)
+// Il faut limiter les tags à A..Z, a..z, 0..9, -, _, ' + les caractères accentués
+pattern = "[A-z0-9À-ž \-_]+"
+
+
